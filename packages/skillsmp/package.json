@@ -14,9 +14,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@devforge/shared": "^0.1.1",
-    "@zr-ovo/devforge-shared": "^0.1.1",
-    "devforge-shared": "^0.1.0"
+    "@zr-ovo/devforge-shared": "^0.1.1"
   },
   "license": "MIT",
   "repository": {

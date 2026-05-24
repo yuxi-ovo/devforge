@@ -17,12 +17,8 @@
   },
   "dependencies": {
     "@clack/prompts": "^0.9.0",
-    "@devforge/shared": "^0.1.1",
-    "@devforge/skillsmp": "^0.1.1",
     "@zr-ovo/devforge-shared": "^0.1.1",
-    "@zr-ovo/devforge-skillsmp": "^0.1.1",
-    "devforge-shared": "^0.1.0",
-    "devforge-skillsmp": "^0.1.0"
+    "@zr-ovo/devforge-skillsmp": "^0.1.1"
   },
   "engines": {
     "node": ">=18"
