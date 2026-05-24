@@ -1,28 +1,33 @@
 {
-  "name": "devforge-shared",
-  "version": "0.1.0",
+  "name": "@zr-ovo/devforge-shared",
+  "version": "0.1.2",
+  "description": "Shared utilities for DevForge CLI",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc --watch",
-    "test": "vitest run",
-    "db:generate": "prisma generate",
-    "db:push": "prisma db push",
-    "db:migrate": "prisma migrate dev"
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@prisma/client": "^5.14.0",
-    "bullmq": "^5.7.0",
     "dotenv": "^16.4.0",
-    "ioredis": "^5.4.0",
     "pino": "^9.0.0"
   },
   "devDependencies": {
-    "prisma": "^5.14.0",
-    "vitest": "^1.6.0"
+    "prisma": "^5.14.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yuxi-ovo/devforge.git",
+    "directory": "packages/shared"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

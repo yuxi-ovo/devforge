@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
-import { getDb, logger, config } from 'devforge-shared'
-import { SkillsMPClient } from 'devforge-skillsmp'
+import { getDb, logger, config } from '@zr-ovo/devforge-shared'
+import { SkillsMPClient } from '@zr-ovo/devforge-skillsmp'
 
 const searchQuerySchema = z.object({
   q: z.string().min(1).max(200),

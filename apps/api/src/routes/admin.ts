@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify'
-import { getDb, logger } from 'devforge-shared'
-import { SkillsMPClient } from 'devforge-skillsmp'
-import { config } from 'devforge-shared'
+import { getDb, logger } from '@zr-ovo/devforge-shared'
+import { SkillsMPClient } from '@zr-ovo/devforge-skillsmp'
+import { config } from '@zr-ovo/devforge-shared'
 
 export async function adminRoutes(app: FastifyInstance): Promise<void> {
   // GET /admin/health — 健康检查

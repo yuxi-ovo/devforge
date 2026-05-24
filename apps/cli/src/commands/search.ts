@@ -1,7 +1,7 @@
 import * as p from '@clack/prompts'
 import { exec } from 'child_process'
-import { SkillsMPClient } from 'devforge-skillsmp'
-import { config } from 'devforge-shared'
+import { SkillsMPClient } from '@zr-ovo/devforge-skillsmp'
+import { config } from '@zr-ovo/devforge-shared'
 import { installSkills } from '../utils/installer'
 import {
   renderSection, renderSubSection,

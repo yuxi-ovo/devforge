@@ -2,7 +2,7 @@ import * as p from '@clack/prompts'
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'fs'
 import { resolve } from 'path'
 import { homedir } from 'os'
-import { config } from 'devforge-shared'
+import { config } from '@zr-ovo/devforge-shared'
 import {
   renderSection, renderBox,
   iconBullet, iconInfo, iconWarning,

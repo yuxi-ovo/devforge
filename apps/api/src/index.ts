@@ -1,6 +1,6 @@
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
-import { logger, config, getDb, disconnectDb } from 'devforge-shared'
+import { logger, config, getDb, disconnectDb } from '@zr-ovo/devforge-shared'
 import { searchRoutes } from './routes/search'
 import { skillRoutes } from './routes/skills'
 import { adminRoutes } from './routes/admin'

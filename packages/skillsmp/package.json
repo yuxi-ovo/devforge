@@ -1,16 +1,30 @@
 {
-  "name": "devforge-skillsmp",
-  "version": "0.1.0",
+  "name": "@zr-ovo/devforge-skillsmp",
+  "version": "0.1.2",
+  "description": "SkillsMP API client for DevForge",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "scripts": {
     "build": "tsc -b",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "@devforge/shared": "^0.1.1",
+    "@zr-ovo/devforge-shared": "^0.1.1",
     "devforge-shared": "^0.1.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yuxi-ovo/devforge.git",
+    "directory": "packages/skillsmp"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

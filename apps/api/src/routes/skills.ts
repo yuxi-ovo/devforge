@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
-import { getDb } from 'devforge-shared'
+import { getDb } from '@zr-ovo/devforge-shared'
 
 export async function skillRoutes(app: FastifyInstance): Promise<void> {
   app.get('/skills/:id', async (req, reply) => {

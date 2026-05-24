@@ -1,4 +1,4 @@
-import { logger } from 'devforge-shared'
+import { logger } from '@zr-ovo/devforge-shared'
 
 const BASE = 'https://skillsmp.com/api/v1'
 

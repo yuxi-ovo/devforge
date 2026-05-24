@@ -1,4 +1,4 @@
-import { config } from 'devforge-shared'
+import { config } from '@zr-ovo/devforge-shared'
 
 export interface AnalysisResult {
   projectName: string
