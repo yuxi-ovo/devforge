@@ -1,14 +1,6 @@
 # DevForge
 
-> 为 Claude Code 发现、搜索并安装 Skill 的命令行工具。
-
-```text
-  ╔╦╗╔═╗╔═╗╦  ╦╔═╗╔═╗
-   ║║║╣ ╠═╣║  ║║  ║╣ 
-  ═╩╝╚═╝╩ ╩╩═╝╩╚═╝╚═╝
-```
-
-DevForge 通过 AI 分析你的项目描述，自动提取技术关键词，在 [SkillsMP](https://skillsmp.com) 市场中搜索匹配的 Claude Code Skill，并一键安装到 `.claude/skills/` 目录。
+AI 分析项目描述，自动提取关键词，在 SkillsMP 市场搜索匹配的 Skill 并安装到 `.claude/skills/`。
 
 ---
 
