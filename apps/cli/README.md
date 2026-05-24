@@ -2,11 +2,29 @@
 
 AI Native Workspace Orchestrator — 用自然语言描述项目，AI 自动搜索并安装 Claude Code Skills。
 
+```text
+  ██████╗ ███████╗██╗   ██╗
+  ██╔══██╗██╔════╝██║   ██║
+  ██║  ██║█████╗  ██║   ██║
+  ██║  ██║██╔══╝  ╚██╗ ██╔╝
+  ██████╔╝██║      ╚████╔╝
+  ╚═════╝ ╚═╝       ╚═══╝
+  DevForge v1.0.2
+```
+
 ## 安装
 
 ```bash
 npm install -g @zr-ovo/devforge
 ```
+
+## 特性
+
+- **AI 关键词提取** — 描述项目后，AI 自动分析并提取 3-5 个技术关键词
+- **智能搜索** — 按关键词搜索 SkillsMP 市场，每个关键词取 Top 5，聚合去重
+- **语言优先级** — 同一 Skill 优先取中文版，其次英文，跳过日韩法德等
+- **查看详情** — 选择 Skill 时可输入序号跳转到 SkillsMP 详情页
+- **精美的终端 UI** — 24-bit 真彩色、卡片布局、动态进度追踪
 
 ## 快速开始
 
@@ -47,6 +65,8 @@ devforge install <skill-id>
 | `devforge search <query>` | 搜索 Skill 市场 |
 | `devforge install <id...>` | 安装指定 Skill |
 | `devforge config` | 配置 AI 和 SkillsMP |
+| `devforge --version` | 显示版本号 |
+| `devforge --help` | 显示帮助信息 |
 
 ## 配置
 

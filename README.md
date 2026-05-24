@@ -9,7 +9,7 @@
   ██║  ██║██╔══╝  ╚██╗ ██╔╝
   ██████╔╝██║      ╚████╔╝
   ╚═════╝ ╚═╝       ╚═══╝
-  DevForge v0.1.0
+  DevForge v1.0.2
 ```
 
 ---
@@ -38,7 +38,7 @@ git clone https://github.com/yuxi-ovo/devforge.git
 cd devforge
 npm install
 npm run build
-npm link --workspace apps/cli
+cd apps/cli && npm link
 ```
 
 ### 配置
@@ -117,7 +117,6 @@ devforge/
 │           └── utils/     # 工具函数
 ├── packages/
 │   ├── shared/       # 共享配置和工具
-│   ├── github/       # GitHub API 客户端
 │   └── skillsmp/     # SkillsMP API 客户端
 └── package.json
 ```
