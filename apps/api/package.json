@@ -1,0 +1,20 @@
+{
+  "name": "devforge-api",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "devforge-shared": "^0.1.0",
+    "devforge-skillsmp": "^0.1.0",
+    "fastify": "^4.26.0",
+    "@fastify/cors": "^9.0.0",
+    "zod": "^3.22.0"
+  }
+}

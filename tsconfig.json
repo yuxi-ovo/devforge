@@ -1,0 +1,10 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/shared" },
+    { "path": "packages/github" },
+    { "path": "packages/skillsmp" },
+    { "path": "apps/api" },
+    { "path": "apps/cli" }
+  ]
+}

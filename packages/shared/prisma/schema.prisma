@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// 缓存从 SkillsMP API 获取的 Skill 数据
+model Skill {
+  id          String   @id // SkillsMP skill ID
+  name        String
+  author      String?
+  description String?
+  githubUrl   String?
+  skillUrl    String?
+  stars       Int      @default(0)
+  path        String?
+  branch      String?
+
+  /// 安全扫描结果
+  riskScore  Int?
+  riskLevel  String?  // low | medium | high | critical
+
+  /// 原始 SKILL.md 内容（按需从 GitHub 拉取）
+  rawContent String?
+
+  /// 缓存控制
+  cachedAt   DateTime @default(now())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  securityReports SkillSecurityReport[]
+
+  @@index([name, description])
+  @@index([cachedAt])
+  @@map("skills")
+}
+
+/// 按需安全扫描结果
+model SkillSecurityReport {
+  id             String   @id @default(cuid())
+  skillId        String
+  scannerVersion String
+  riskScore      Int
+  riskLevel      String   // low | medium | high | critical
+  findings       String?  // JSON [{ ruleId, ruleName, severity, description, codeSnippet }]
+  rawOutput      String?
+  scannedAt      DateTime @default(now())
+
+  skill Skill @relation(fields: [skillId], references: [id])
+
+  @@index([riskLevel, riskScore(sort: Desc)])
+  @@map("skill_security_reports")
+}
+
+/// API 调用量追踪（用于展示剩余配额）
+model ApiUsage {
+  id        String   @id @default(cuid())
+  date      String   // YYYY-MM-DD
+  count     Int      @default(0)
+  updatedAt DateTime @updatedAt
+
+  @@unique([date])
+  @@map("api_usage")
+}

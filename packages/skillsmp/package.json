@@ -1,0 +1,16 @@
+{
+  "name": "devforge-skillsmp",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "devforge-shared": "^0.1.0"
+  }
+}
