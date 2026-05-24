@@ -6,7 +6,6 @@
   ╔╦╗╔═╗╔═╗╦  ╦╔═╗╔═╗
    ║║║╣ ╠═╣║  ║║  ║╣ 
   ═╩╝╚═╝╩ ╩╩═╝╩╚═╝╚═╝
-  v1.0.2
 ```
 
 ## 安装
@@ -26,11 +25,20 @@ npm install -g @zr-ovo/devforge
 ## 使用
 
 ```bash
-devforge config                          # 配置 API Key
-devforge search "vue react typescript"   # 搜索 Skill
-devforge create my-project               # 创建项目并安装
-devforge init                            # 当前目录初始化
-devforge install <skill-id>              # 安装指定 Skill
+# 配置 API Key
+devforge config
+
+# 搜索 Skill
+devforge search "vue react typescript"
+
+# 创建项目并安装
+devforge create my-project
+
+# 当前目录初始化
+devforge init
+
+# 安装指定 Skill
+devforge install <skill-id>
 ```
 
 ## 命令
@@ -56,6 +64,12 @@ AI_MODEL=claude-sonnet-4-6
 SKILLSMP_API_KEY=your-skillsmp-key
 ```
 
-## License
+## 依赖
+
+- `@clack/prompts` — 交互式终端 UI
+- `@zr-ovo/devforge-shared` — 配置、日志
+- `@zr-ovo/devforge-skillsmp` — SkillsMP API 客户端
+
+## 许可证
 
 MIT

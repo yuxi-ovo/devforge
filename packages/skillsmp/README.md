@@ -1,67 +1,87 @@
 # @zr-ovo/devforge-skillsmp
 
-SkillsMP API client for searching and discovering Claude Code Skills.
+SkillsMP API 客户端 — 搜索和发现 Claude Code Skill。
 
-## Installation
+## 安装
 
 ```bash
 npm install @zr-ovo/devforge-skillsmp
 ```
 
-## Usage
+## 使用
 
 ```typescript
 import { SkillsMPClient } from '@zr-ovo/devforge-skillsmp'
 
 const client = new SkillsMPClient('your-api-key', 500)
 
-// Keyword search
+// 关键词搜索
 const result = await client.search({
   q: 'vue react',
   limit: 5,
   sortBy: 'stars',
 })
 
-console.log(result.skills) // Array of skills
-console.log(result.total)  // Total count
+console.log(result.skills) // Skill[]
+console.log(result.total)  // 总数
 
-// AI semantic search
+// AI 语义搜索
 const skills = await client.aiSearch('build a chat app with websocket')
-console.log(skills) // Array of matching skills
+console.log(skills) // Skill[]
+
+// 剩余配额
+console.log(client.remaining) // 499
 ```
 
-## API Reference
+## API
 
 ### `new SkillsMPClient(apiKey, dailyLimit?)`
 
-Create a new client instance.
+创建客户端实例。
 
-- `apiKey` — Your SkillsMP API key (get one at [skillsmp.com](https://skillsmp.com))
-- `dailyLimit` — Max API calls per day (default: 500)
+- `apiKey` — SkillsMP API Key（从 [skillsmp.com](https://skillsmp.com) 获取）
+- `dailyLimit` — 每日调用限制（默认 500）
 
 ### `client.search(params)`
 
-Keyword search for skills.
+关键词搜索。
 
-- `params.q` — Search query
-- `params.limit` — Results per page (default: 20)
-- `params.sortBy` — Sort order: `'recent'` or `'stars'`
-- `params.category` — Filter by category
+| 参数 | 类型 | 说明 |
+|------|------|------|
+| `q` | `string` | 搜索关键词 |
+| `limit` | `number` | 每页数量（默认 20） |
+| `sortBy` | `'recent' \| 'stars'` | 排序方式 |
+| `category` | `string` | 分类筛选 |
 
-Returns: `{ skills, total, hasMore }`
+返回：`{ skills: SkillsMPSkill[], total: number, hasMore: boolean }`
 
 ### `client.aiSearch(query)`
 
-AI-powered semantic search.
+AI 语义搜索。
 
-- `query` — Natural language description
+- `query` — 自然语言描述
 
-Returns: `SkillsMPSkill[]`
+返回：`SkillsMPSkill[]`
 
 ### `client.remaining`
 
-Number of API calls remaining today.
+当日剩余 API 调用次数。
 
-## License
+## SkillsMPSkill 类型
+
+```typescript
+interface SkillsMPSkill {
+  id: string
+  name: string
+  author: string
+  description: string
+  githubUrl: string
+  skillUrl?: string
+  stars: number
+  updatedAt: string
+}
+```
+
+## 许可证
 
 MIT
