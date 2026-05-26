@@ -85,8 +85,17 @@ export class SkillsMPClient {
       this.dailyUsage++
 
       if (!res.ok) {
-        logger.warn({ status: res.status, module: 'skillsmp' }, 'SkillsMP search failed')
-        return { skills: [], total: 0, hasMore: false }
+        const errBody = await res.json().catch(() => ({})) as { error?: { code?: string; message?: string } }
+        const code = errBody.error?.code
+        const msg = errBody.error?.message || 'Unknown error'
+
+        if (code === 'INVALID_API_KEY') throw new Error('API Key 无效，请运行 devforge config 重新配置')
+        if (code === 'MISSING_QUERY') throw new Error('缺少搜索关键词')
+        if (code === 'DAILY_QUOTA_EXCEEDED') throw new Error('今日 API 调用次数已用完，请明天再试')
+        if (code === 'INTERNAL_ERROR') throw new Error('SkillsMP 服务器内部错误，请稍后再试')
+
+        logger.warn({ status: res.status, code, module: 'skillsmp' }, 'SkillsMP search failed')
+        throw new Error(`SkillsMP 请求失败: ${res.status} ${msg}`)
       }
 
       const body = (await res.json()) as SearchResponse
@@ -100,6 +109,8 @@ export class SkillsMPClient {
         hasMore: body.data.pagination.hasNext,
       }
     } catch (err) {
+      if (err instanceof Error && err.message.startsWith('API Key')) throw err
+      if (err instanceof Error && err.message.includes('API 调用次数')) throw err
       logger.error({ err, module: 'skillsmp' }, 'SkillsMP search error')
       return { skills: [], total: 0, hasMore: false }
     }
@@ -122,11 +133,24 @@ export class SkillsMPClient {
 
       this.dailyUsage++
 
-      if (!res.ok) return []
+      if (!res.ok) {
+        const errBody = await res.json().catch(() => ({})) as { error?: { code?: string; message?: string } }
+        const code = errBody.error?.code
+        const msg = errBody.error?.message || 'Unknown error'
+
+        if (code === 'INVALID_API_KEY') throw new Error('API Key 无效，请运行 devforge config 重新配置')
+        if (code === 'MISSING_QUERY') throw new Error('缺少搜索关键词')
+        if (code === 'DAILY_QUOTA_EXCEEDED') throw new Error('今日 API 调用次数已用完，请明天再试')
+        if (code === 'INTERNAL_ERROR') throw new Error('SkillsMP 服务器内部错误，请稍后再试')
+
+        throw new Error(`SkillsMP 请求失败: ${res.status} ${msg}`)
+      }
 
       const body = (await res.json()) as SearchResponse
       return body.success ? body.data.skills : []
     } catch (err) {
+      if (err instanceof Error && err.message.startsWith('API Key')) throw err
+      if (err instanceof Error && err.message.includes('API 调用次数')) throw err
       logger.error({ err, module: 'skillsmp' }, 'SkillsMP AI search error')
       return []
     }
