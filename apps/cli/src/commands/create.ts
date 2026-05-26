@@ -20,6 +20,7 @@ import {
   BOLD, DIM, RESET,
 } from '../ui/theme'
 import { truncate, formatStars } from '../ui/format'
+import { isPreferredOver } from '../utils/lang'
 
 interface SkillItem {
   id: string
@@ -95,13 +96,7 @@ export async function createCommand(projectName?: string, isInit = false): Promi
       const result = await client.search({ q, limit: 5, sortBy: 'stars' })
       for (const skill of result.skills) {
         const existing = seenNames.get(skill.name)
-        if (!existing) {
-          seenNames.set(skill.name, {
-            id: skill.id, name: skill.name, author: skill.author,
-            description: skill.description, githubUrl: skill.githubUrl,
-            stars: skill.stars,
-          })
-        } else if (isPreferredOver(skill.id, existing.id)) {
+        if (!existing || isPreferredOver(skill.id, existing.id)) {
           seenNames.set(skill.name, {
             id: skill.id, name: skill.name, author: skill.author,
             description: skill.description, githubUrl: skill.githubUrl,
@@ -311,16 +306,3 @@ async function selectSkillsInteractive(
   }
 }
 
-// ── 语言优先级：中文 > 英文 > 其他 ──
-
-const NON_EN_LANGS = ['docs-ja-jp', 'docs-ko-kr', 'docs-fr-fr', 'docs-de-de', 'docs-es-es', 'docs-pt-br', 'docs-ru-ru', 'docs-it-it']
-
-function langScore(id: string): number {
-  if (id.includes('docs-zh-cn') || id.includes('docs-zh-tw')) return 2 // 中文最优
-  if (NON_EN_LANGS.some((l) => id.includes(l))) return 0 // 日韩法德等跳过
-  return 1 // 英文/默认
-}
-
-function isPreferredOver(newId: string, existingId: string): boolean {
-  return langScore(newId) > langScore(existingId)
-}

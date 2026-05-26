@@ -4,9 +4,8 @@ import { SkillsMPClient } from '@zr-ovo/devforge-skillsmp'
 import { config } from '@zr-ovo/devforge-shared'
 import { installSkills } from '../utils/installer'
 import {
-  renderSection, renderSubSection,
-  renderCardList,
-  iconInfo, iconBullet, iconSuccess,
+  renderSection,
+  iconInfo, iconSuccess,
   Spinner, PhaseTracker,
 } from '../ui'
 import {
@@ -14,6 +13,7 @@ import {
   BOLD, DIM, RESET,
 } from '../ui/theme'
 import { truncate, formatStars } from '../ui/format'
+import { isPreferredOver } from '../utils/lang'
 
 export async function searchCommand(query?: string): Promise<void> {
   if (!query) {
@@ -127,7 +127,6 @@ export async function searchCommand(query?: string): Promise<void> {
   const pt = new PhaseTracker(72)
   pt.setPhases([
     { name: '下载 Skill', status: 'active' },
-    { name: '完成配置', status: 'pending' },
   ])
   pt.begin()
 
@@ -152,7 +151,6 @@ export async function searchCommand(query?: string): Promise<void> {
   )
 
   pt.updatePhase(0, installResult.failed > 0 && installResult.success === 0 ? 'failed' : 'completed')
-  pt.updatePhase(1, installResult.success > 0 ? 'completed' : 'failed')
   pt.complete()
 
   // Summary
@@ -165,16 +163,3 @@ export async function searchCommand(query?: string): Promise<void> {
   console.log()
 }
 
-// ── 语言优先级：中文 > 英文 > 其他 ──
-
-const NON_EN_LANGS = ['docs-ja-jp', 'docs-ko-kr', 'docs-fr-fr', 'docs-de-de', 'docs-es-es', 'docs-pt-br', 'docs-ru-ru', 'docs-it-it']
-
-function langScore(id: string): number {
-  if (id.includes('docs-zh-cn') || id.includes('docs-zh-tw')) return 2
-  if (NON_EN_LANGS.some((l) => id.includes(l))) return 0
-  return 1
-}
-
-function isPreferredOver(newId: string, existingId: string): boolean {
-  return langScore(newId) > langScore(existingId)
-}

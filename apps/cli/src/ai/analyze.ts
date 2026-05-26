@@ -51,37 +51,15 @@ export async function analyzeProject(projectDesc: string, defaultName?: string):
   }
 
   if (provider === 'claude') {
-    return analyzeWithClaude(systemPrompt, prompt, model, apiKey, baseUrl, defaultName)
+    const text = await callClaude(systemPrompt, prompt, model, apiKey, baseUrl)
+    return parseAnalysis(text, defaultName)
   }
 
-  return analyzeWithOpenAI(systemPrompt, prompt, model, apiKey, baseUrl, defaultName)
+  const text = await callOpenAI(systemPrompt, prompt, model, apiKey, baseUrl!)
+  return parseAnalysis(text, defaultName)
 }
 
 // ---- Internal HTTP helpers ----
-
-async function analyzeWithClaude(
-  system: string,
-  prompt: string,
-  model: string,
-  apiKey: string,
-  baseUrl?: string,
-  defaultName?: string,
-): Promise<AnalysisResult> {
-  const text = await callClaude(system, prompt, model, apiKey, baseUrl)
-  return parseAnalysis(text, defaultName)
-}
-
-async function analyzeWithOpenAI(
-  system: string,
-  prompt: string,
-  model: string,
-  apiKey: string,
-  baseUrl: string,
-  defaultName?: string,
-): Promise<AnalysisResult> {
-  const text = await callOpenAI(system, prompt, model, apiKey, baseUrl)
-  return parseAnalysis(text, defaultName)
-}
 
 async function callClaude(
   system: string,

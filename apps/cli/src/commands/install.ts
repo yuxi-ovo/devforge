@@ -3,12 +3,12 @@ import { SkillsMPClient } from '@zr-ovo/devforge-skillsmp'
 import { config } from '@zr-ovo/devforge-shared'
 import { installSkills } from '../utils/installer'
 import {
-  renderSection, renderSubSection,
+  renderSection,
   iconSuccess, iconError, iconInfo, iconBullet,
   Spinner, PhaseTracker,
 } from '../ui'
 import {
-  PRIMARY, SUCCESS, WARNING, TEXT_SECONDARY, TEXT_MUTED,
+  SUCCESS, WARNING,
   BOLD, DIM, RESET,
 } from '../ui/theme'
 
@@ -61,7 +61,6 @@ export async function installCommand(args: string[]): Promise<void> {
   const pt = new PhaseTracker(72)
   pt.setPhases([
     { name: '下载 Skill', status: 'active' },
-    { name: '完成配置', status: 'pending' },
   ])
   pt.begin()
 
@@ -86,7 +85,6 @@ export async function installCommand(args: string[]): Promise<void> {
   )
 
   pt.updatePhase(0, result.failed > 0 && result.success === 0 ? 'failed' : 'completed')
-  pt.updatePhase(1, result.success > 0 ? 'completed' : 'failed')
   pt.complete()
 
   // Summary

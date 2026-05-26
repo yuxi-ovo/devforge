@@ -24,10 +24,10 @@ export function badgeForCategory(category: string): string {
     '核心': BADGE_CORE,
     '测试': BADGE_TESTING,
     '数据库': BADGE_DB,
-    'API': BADGE_API,
-    'api': BADGE_API,
     '部署': BADGE_DEPLOY,
     '工具': BADGE_TOOL,
   }
+  const key = category.toLowerCase()
+  if (key === 'api') return BADGE_API
   return map[category] || renderBadge(category, PRIMARY)
 }

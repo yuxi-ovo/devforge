@@ -61,9 +61,6 @@ export function renderCard(opts: CardOptions): string[] {
   const nameStr = `${BOLD}${TEXT_PRIMARY}${opts.name}${RESET}`
   const metaStr = opts.metadata ? ` ${TEXT_MUTED}${opts.metadata}${RESET}` : ''
   const titleLeft = `${prefix}${nameStr}${metaStr}`
-  const titleLeftLen = visibleWidth(titleLeft)
-  const rightEdge = inner - titleLeftLen
-  const rightContent = ''
   const titleLine = `  ${titleLeft}`
   result.push(`${border}│${RESET}${padEnd(titleLine, inner)}${border}│${RESET}`)
 

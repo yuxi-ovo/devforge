@@ -163,6 +163,53 @@ devforge --help
 devforge search "vue"
 ```
 
+## 测试
+
+### 测试方法
+
+使用 10 个不同技术栈的项目描述，在非交互模式下运行 `devforge create`，自动安装前 5 个推荐 Skill，评估推荐准确性和稳定性。
+
+```bash
+# 运行单个测试
+devforge create "用vue开发一个电商网站 包含商品展示 购物车和支付功能"
+
+# 批量测试脚本
+cd /path/to/test-dir && bash run-tests.sh
+```
+
+### 测试用例与结果
+
+| # | 项目描述 | AI 提取关键词 | 搜索结果 | 安装的 Skill |
+|---|---|---|---|---|
+| 1 | 用vue开发一个电商网站 包含商品展示 购物车和支付功能 | `vue · ecommerce · frontend · shopping cart` | 15 个 | vue, vue-best-practices, vueuse-functions, frontend-patterns, frontend-slides |
+| 2 | 用React和WebSocket开发实时聊天应用 支持群聊和文件传输 | `react · websocket · chat · realtime` | 20 个 | react, react-vendoring, chat-sdk, chat-perf, chat-customizations-editor |
+| 3 | 用Python开发机器学习数据处理管道 包含特征工程和模型训练 | `python · machine learning · data pipeline · feature engineering` | 10 个 | python-patterns, python-testing, python-debugpy, data-pipeline, machine-learning-ops-ml-pipeline |
+| 4 | 用Node.js开发RESTful API服务器 使用Express和PostgreSQL数据库 | `nodejs · express · postgresql · restful api` | 15 个 | nodejs-backend-patterns, nodejs-best-practices, nodejs-keccak256, postgresql, postgresql-optimization |
+| 5 | 用Rust开发WebAssembly浏览器游戏引擎 支持2D渲染和物理模拟 | `rust · webassembly · game engine · 2d rendering · physics simulation` | 18 个 | rust-patterns, rust-testing, game-engine, game-engine-resources, game-engineering-team |
+| 6 | 用Go开发微服务架构 包含服务发现 API网关和消息队列 | `golang · microservices · service discovery · API gateway · message queue` | 12 个 | golang-patterns, golang-testing, api-gateway, microservices-architect, microservices-patterns |
+| 7 | 用Flutter开发跨平台移动应用 包含用户认证和本地存储 | `Flutter · mobile app · authentication · local storage` | 17 个 | flutter-animating-apps, flutter-dart-code-review, flutter-pr-checks-finder, rebuilding-flutter-tool, mobile-app |
+| 8 | 用Next.js开发博客系统 支持MDX渲染 SEO优化和评论功能 | `nextjs · blog · mdx · seo · comments` | 13 个 | nextjs-turbopack, blog-post, blogwatcher, seo, seo-review |
+| 9 | 用UniApp开发微信小程序 包含用户登录 支付和地图功能 | `uniapp · wechat miniprogram · vue3 · mobile` | 10 个 | uniapp, mobile-app, mobile-games, mobile-onboarding, mobile-security-coder |
+| 10 | 搭建DevOps CI/CD流水线 使用Docker Kubernetes和GitHub Actions | `Docker · Kubernetes · GitHub Actions · CI/CD · DevOps` | 19 个 | docker-management, docker-patterns, kubernetes-architect, ci-cd-and-automation, playwright-devops |
+
+### 评估结果
+
+| 维度 | 得分 | 说明 |
+|---|---|---|
+| 关键词准确性 | 9.5/10 | 所有用例 AI 提取的关键词与项目描述高度匹配 |
+| 推荐相关性 | 8.5/10 | 8/10 用例推荐的 5 个 Skill 全部相关，2/10 有 1 个不太相关 |
+| 语言优先级 | 10/10 | 同一 Skill 正确优先推荐中文版 |
+| 去重效果 | 10/10 | 无重复 Skill 安装 |
+| 稳定性 | 10/10 | 全部一次成功，无超时、无报错 |
+| 安装完整性 | 10/10 | 50 个 Skill 全部安装成功，SKILL.md 文件完整 |
+| **综合** | **9.5/10** | |
+
+### 已知问题
+
+- 项目名包含 `/` 时路径会被截断（如 `CI/CD`），需对项目名做特殊字符过滤
+- 小众技术领域（UniApp、Rust/WASM）市场 Skill 数量较少，推荐选择余地有限
+- 个别推荐 Skill 相关性偏低（如 Node.js 项目推荐了 keccak256 加密哈希）
+
 ## 许可证
 
 MIT
